@@ -1,0 +1,24 @@
+<h1>Listing all articles</h1>
+<p>
+  <%= link_to  "Create new article", new_article_path %>
+</p>
+<table>
+  <tr>
+      <th>Title</th>
+      <th>Description</th>
+  </tr>
+  <% @articles.each do |f| %>
+  <tr>
+      <td>Title: <%= f.title %></td>
+      <td>Description <%= f.description %></td>
+      <td><%= link_to  'Edit', edit_article_path(f) %></td>
+      <td><%= link_to  'Show', article_path(f) %></td>
+      <td><%= link_to  "Delete", article_path(f), method: :delete, data: {confirm: "Are you sure?"} %></td>
+      <small>
+          Created by: <%= f.user.username if f.user %>,</small>
+          <%= time_ago_in_words(f.create_at) %> ago,
+          last updated: <%= time_ago_in_words(f.updated_at) %> ago
+      </small>
+    </tr>
+  <% end %>
+</table>
